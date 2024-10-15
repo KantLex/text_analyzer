@@ -3,12 +3,12 @@
 use std::io::{self, Write};
 
 fn main() {
-    let text = read_input();
+    let text: String = read_input();
 
     //Passes references &text to avoid unnecessary copying.
-    let char_count = count_characters(&text);
-    let word_count = count_words(&text);
-    let longest = longest_word(&text);
+    let char_count: usize = count_characters(&text);
+    let word_count: usize = count_words(&text);
+    let longest: Option<&str> = longest_word(&text);
 
     println!("Character count: {}", char_count);
     println!("Word count: {}", word_count);
@@ -19,7 +19,7 @@ fn main() {
 }
 
 fn read_input() -> String {
-    let mut text = String::new();
+    let mut text: String = String::new();
 
     println!("Enter your text (type 'END' to finsinh)");
 
@@ -28,7 +28,7 @@ fn read_input() -> String {
         io::stdout().flush().expect("Failed to flush stdout");
 
         // Accumulates the text in a String.
-        let mut line = String::new();
+        let mut line: String = String::new();
         io::stdin()
             .read_line(&mut line)
             .expect("Failed to read line");
