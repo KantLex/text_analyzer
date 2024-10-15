@@ -18,3 +18,54 @@ fn main() {
     }
 }
 
+fn read_input() -> String {
+    let mut text = String::new();
+
+    println!("Enter your text (type 'END' to finsinh)");
+
+    loop {
+        print!(">");
+        io::stdout().flush().expect("Failed to flush stdout");
+
+        // Accumulates the text in a String.
+        let mut line = String::new();
+        io::stdin()
+            .read_line(&mut line)
+            .expect("Failed to read line");
+
+        if line.trim() == "END" {
+            break;
+        }
+
+        text.push_str(&line);
+    }
+
+    text
+}
+
+fn count_characters(text: &String) -> usize {
+    text.chars().count()
+}
+
+fn count_words(text: &String) -> usize {
+    text.split_whitespace().count()
+}
+
+fn longest_word<'a>(text: &'a String) -> Option<&'a str> {
+    let mut longest: Option<&str> = None;
+
+    for word in text.split_whitespace() {
+        match longest {
+            Some(current_longest) => {
+                if word.len() > current_longest.len() {
+                    longest = Some(word);
+                }
+            }
+            None => {
+                longest = Some(word);
+            }
+        }
+    }
+
+    longest
+}
